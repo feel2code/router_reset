@@ -7,6 +7,8 @@ import socket
 opts = Options()
 driver_path = os.path.dirname(os.path.abspath(__file__))
 
+
+# rebooting router via http, cause it is not have telnet or ssh
 def reset():
     driver = webdriver.Firefox(executable_path = driver_path + '/machine', service_log_path = None , options = opts)
     driver.get('http://192.168.0.100')
@@ -59,6 +61,8 @@ def reset():
     driver.quit()
     print('ok')
 
+
+# checking internet
 def connection():
     try:
         host = socket.gethostbyname('http://www.ya.ru')
@@ -69,6 +73,7 @@ def connection():
         return False
 
 
+# if internet is not working - rebooting the router
 while True:
     time.sleep(5)
     if connection() == True:
