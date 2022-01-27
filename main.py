@@ -12,13 +12,18 @@ driver_path = os.path.dirname(os.path.abspath(__file__))
 def reset():
     driver = webdriver.Firefox(executable_path = driver_path + '/machine', service_log_path = None , options = opts)
     driver.get('http://192.168.0.100')
-    status = False
-    while not status:
-        try:
-            driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div[3]/div[3]/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/span[2]/input[1]').click()
-            status = True
-        except:
-            time.sleep(1)
+
+    def click(xpath):
+        status = False
+        while not status:
+            try:
+                driver.find_element_by_xpath(xpath).click()
+                status = True
+            except:
+                time.sleep(1)
+
+
+    click('/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div[3]/div[3]/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/span[2]/input[1]')
     status = False
     while not status:
         try:
@@ -42,21 +47,9 @@ def reset():
         except:
             time.sleep(1)
     time.sleep(4)
-    status = False
-    while not status:
-        try:
-            driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div[2]/div/div[2]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/a').click()
-            status = True
-        except:
-            time.sleep(1)
+    click('/html/body/div[1]/div/div[1]/div/div[2]/div[2]/div/div[2]/div[1]/div[3]/div[1]/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/a')
     time.sleep(2)
-    status = False
-    while not status:
-        try:
-            driver.find_element_by_xpath('/html/body/div[5]/div[7]/div[4]/div/div/div[2]/div/div[2]/div/div[2]/div[1]/a/span[2]').click()
-            status = True
-        except:
-            time.sleep(1)
+    click('/html/body/div[5]/div[7]/div[4]/div/div/div[2]/div/div[2]/div/div[2]/div[1]/a/span[2]')
     time.sleep(5)
     driver.quit()
     print('ok')
@@ -82,4 +75,5 @@ while True:
     else:
         print('internet is down. rebooting...')
         reset()
+        time.sleep(100)
     time.sleep(5)
