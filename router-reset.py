@@ -91,10 +91,10 @@ while True:
         for last_address in range(100, 116):
             print('internet is down. rebooting...')
             try:
-                reset(main + last_address)
+                reset(main + str(last_address))
             except:
                 print(
                     'something gone wrong. trying next IP address:',
-                    main + last_address
+                    main + str(last_address)
                 )
         time.sleep(100)
