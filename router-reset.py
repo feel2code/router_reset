@@ -3,10 +3,11 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 import socket
-opts = Options()
+
 # import os
 # driver_path = os.path.dirname(os.path.abspath(__file__))
 
+opts = Options()
 main = 'http://192.168.0.'
 
 
