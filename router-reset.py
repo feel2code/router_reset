@@ -11,13 +11,15 @@ main = 'http://192.168.0.'
 
 
 def reset(ip_address: str):
-    # driver = webdriver.Firefox(executable_path = driver_path + '/machine',
+    '''reset router'''
+    # driver = webdriver.Firefox(executable_path = driver_path + '/selenium-gecko',
     # service_log_path = None , options = opts)
     driver = webdriver.Firefox('C:/geckodriver.exe', service_log_path=None,
                                options=opts)
     driver.get(ip_address)
 
     def click(xpath):
+        '''click on element by xpath'''
         status = False
         while not status:
             try:
@@ -27,6 +29,7 @@ def reset(ip_address: str):
                 time.sleep(1)
 
     def send_key(xpath, act):
+        '''send keys by xpath'''
         status = False
         while not status:
             try:
@@ -65,8 +68,8 @@ def reset(ip_address: str):
     print('ok')
 
 
-# checking internet
 def connection():
+    '''checking internet'''
     try:
         # host = socket.gethostbyname('http://www.ya.ru')
         host = socket.gethostbyname('ya.ru')
@@ -84,22 +87,13 @@ while True:
         print('ok')
         time.sleep(5)
     else:
-        for last_adress in range(100, 116)
-        print('internet is down. rebooting...')
-        try:
-            reset(main + last_address)
-        except:
-            print('something gone wrong. trying next IP address:', )
+        for last_address in range(100, 116):
+            print('internet is down. rebooting...')
             try:
-                reset('http://192.168.0.101')
+                reset(main + last_address)
             except:
-                try:
-                    reset('http://192.168.0.102')
-                except:
-                    try:
-                        reset('http://192.168.0.103')
-                    except:
-                        print('something gone wrong. call to administrator.')
-                        time.sleep(200)
+                print(
+                    'something gone wrong. trying next IP address:',
+                    main + last_address
+                )
         time.sleep(100)
-    time.sleep(5)
