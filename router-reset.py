@@ -12,15 +12,19 @@ main = 'http://192.168.0.'
 
 
 def reset(ip_address: str):
-    '''reset router'''
+    """Resetting router."""
     # driver = webdriver.Firefox(executable_path = driver_path + '/selenium-gecko',
     # service_log_path = None , options = opts)
-    driver = webdriver.Firefox('C:/geckodriver.exe', service_log_path=None,
-                               options=opts)
+    driver = webdriver.Firefox(
+        'C:/geckodriver.exe',
+        service_log_path=None,
+        options=opts
+    )
+    
     driver.get(ip_address)
 
     def click(xpath):
-        '''click on element by xpath'''
+        """Click on element by xpath."""
         status = False
         while not status:
             try:
@@ -30,7 +34,7 @@ def reset(ip_address: str):
                 time.sleep(1)
 
     def send_key(xpath, act):
-        '''send keys by xpath'''
+        """Send keys by xpath."""
         status = False
         while not status:
             try:
@@ -49,8 +53,10 @@ def reset(ip_address: str):
     send_key(
         '/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div[3]/div[3]'
         '/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/span[2]'
-        '/input[1]', Keys.ENTER)
+        '/input[1]',Keys.ENTER)
+    
     time.sleep(4)
+    
     status = False
     while not status:
         try:
@@ -58,19 +64,25 @@ def reset(ip_address: str):
             status = True
         except:
             time.sleep(1)
+    
     time.sleep(4)
+    
     click('/html/body/div[1]/div/div[1]/div/div[2]/div[2]/div/div[2]/div[1]'
           '/div[3]/div[1]/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/a')
+
     time.sleep(2)
+    
     click('/html/body/div[5]/div[7]/div[4]/div/div/div[2]/div/div[2]/div'
           '/div[2]/div[1]/a/span[2]')
+    
     time.sleep(5)
+    
     driver.quit()
     print('ok')
 
 
 def connection():
-    '''checking internet'''
+    """Checking internet connection."""
     try:
         # host = socket.gethostbyname('http://www.ya.ru')
         host = socket.gethostbyname('ya.ru')
